@@ -17,7 +17,7 @@ Below is the example of how to use the library
 ```javascript
 const emailVerifier = require("email-verifier-node");
 
-emailVerifier("email@example.com", "ACCESS_TOKEN")
+emailVerifier.verify("email@example.com", "ACCESS_TOKEN")
   .then(response => {
     console.log(response.valid()); // Boolean
     console.log(response.field("status")); // Access any field in response

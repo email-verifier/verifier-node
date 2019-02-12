@@ -1,6 +1,6 @@
 {
   "name": "verifier-node",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Official Library for verifier.meetchopra.com",
   "main": "dist/index.js",
   "scripts": {
