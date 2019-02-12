@@ -2,14 +2,14 @@
 
 # Installation
 
-```npm i email-verifier-node```
+```npm i verifier-node```
 
 or
 
 ```git clone https://github.com/email-verifier/verifier-node.git```
 
 # Usage
-Verifier-node is email library for validating non-exsistent, invalid domain, disposable emails. [Know more](https://verifier.meetchopra.me)
+Verifier-node is email library for validating non-exsistent, invalid domain, disposable emails. [Know more](https://verifier.meetchopra.com)
 
 
 Below is the example of how to use the library
