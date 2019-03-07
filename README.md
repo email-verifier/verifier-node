@@ -2,7 +2,7 @@
 
 # Installation
 
-```npm i verifier-node```
+```npm i -s verifier-node```
 
 or
 
