@@ -21,5 +21,8 @@ emailVerifier.verify("email@example.com", "ACCESS_TOKEN")
   .then(response => {
     console.log(response.valid()); // Boolean
     console.log(response.field("status")); // Access any field in response
+  })
+  .catch(err => {
+  	console.log('error', err)
   });
 ```

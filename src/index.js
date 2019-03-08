@@ -13,6 +13,8 @@ function verify(email, access_token) {
         https.get(endpoint, res => {
             res.on("data", data => response += data);
             res.on("end", () => resolve(new parseResponse(response)));
+        }).on('error', (e) => {
+          reject(e);
         });
     });        
 }
