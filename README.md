@@ -15,7 +15,7 @@ Verifier-node is email library for validating non-exsistent, invalid domain, dis
 Below is the example of how to use the library
 
 ```javascript
-const emailVerifier = require("email-verifier-node");
+const emailVerifier = require("verifier-node");
 
 emailVerifier.verify("email@example.com", "ACCESS_TOKEN")
   .then(response => {
