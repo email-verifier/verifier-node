@@ -1,10 +1,13 @@
 {
   "name": "verifier-node",
   "version": "1.0.2",
-  "description": "Official Library for verifier.meetchopra.com",
+  "description": "Official Node.js Library for VerifyRight Email Verification API",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d dist",
+    "test": "jest",
+    "lint": "eslint src",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -13,12 +16,23 @@
   "keywords": [
     "email",
     "verifier",
-    "email"
+    "email-verification",
+    "validation"
   ],
-  "author": "Meet Chopra",
+  "author": "VerifyRight",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/email-verifier/verifier-node/issues"
   },
-  "homepage": "https://github.com/email-verifier/verifier-node#readme"
+  "homepage": "https://github.com/email-verifier/verifier-node#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.x",
+    "@babel/core": "^7.x",
+    "@babel/preset-env": "^7.x",
+    "eslint": "^8.x",
+    "jest": "^29.x"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
 }

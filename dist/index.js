@@ -1,1 +1,64 @@
-var https = require("https"); function parseResponse(b) { var a = this; this.data = JSON.parse(b); this.field = function (b) { return a.data[b] }; this.valid = function () { return a.data.status } } function verify(b, a) { var d = "https://verifier.meetchopra.com/verify/" + b + "?token=" + a, c = ""; return new Promise(function (b, a) { https.get(d, function (a) { a.on("data", function (a) { return c += a }); a.on("end", function () { return b(new parseResponse(c)) }) }) }) } module.exports.verify = verify;
+const https = require('https');
+class VerificationResponse {
+  constructor(data) {
+    this.data = JSON.parse(data);
+  }
+  field(fieldName) {
+    return this.data[fieldName];
+  }
+  valid() {
+    return Boolean(this.data.status);
+  }
+  getFullResponse() {
+    return this.data;
+  }
+}
+class VerifyRight {
+  constructor(apiKey) {
+    if (!apiKey) {
+      throw new Error('API key is required');
+    }
+    this.apiKey = apiKey;
+  }
+  verify(email) {
+    if (!email) {
+      return Promise.reject(new Error('Email is required'));
+    }
+    if (!this.isValidEmail(email)) {
+      return Promise.reject(new Error('Invalid email format'));
+    }
+    const endpoint = `https://verifyright.co/verify/${encodeURIComponent(email)}?token=${this.apiKey}`;
+    return new Promise((resolve, reject) => {
+      https.get(endpoint, {
+        timeout: 10000,
+        // 10 second timeout
+        headers: {
+          'User-Agent': 'Verifier-Node/1.0.2'
+        }
+      }, res => {
+        let response = '';
+        res.on('data', chunk => response += chunk);
+        res.on('end', () => {
+          try {
+            if (res.statusCode !== 200) {
+              reject(new Error(`API request failed with status ${res.statusCode}`));
+              return;
+            }
+            resolve(new VerificationResponse(response));
+          } catch (error) {
+            reject(new Error(`Failed to parse API response: ${error.message}`));
+          }
+        });
+      }).on('error', error => {
+        reject(new Error(`Network request failed: ${error.message}`));
+      }).on('timeout', () => {
+        reject(new Error('Request timed out'));
+      });
+    });
+  }
+  isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+}
+module.exports = VerifyRight;
